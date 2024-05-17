@@ -51,3 +51,6 @@ Em seguida executar o Laravel em algun ambiente como o wampServer, Laragon, xamp
 Depois disso executar o comando "php artisan migrate" no terminal do diretório para executar as migrations e criar as tabelas.
 Logo apos é acessar o site e verificar.
 
+## Alterações 
+Opção de cadastro de 2 motoristas por viagem
+

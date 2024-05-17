@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('km_f_viagem')->nullable();
             $table->uuid('id_motorista');
             $table->foreign('id_motorista')->references('id')->on('motoristas')->onDelete('cascade');
+            $table->uuid('id_motorista_2')->nullable();
+            $table->foreign('id_motorista_2')->references('id')->on('motoristas')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -13,41 +13,99 @@
                     </ul>
                 </div>
             @endif
-            <form class="row g-3" action="{{ route('viagens.update', $viagem->id) }}" method="POST" >
+            <form class="row g-3" action="{{ route('viagens.update', $viagem->id) }}" method="POST">
                 @csrf
                 @if ($viagem)
                     @method('PUT')
                 @endif
-                <div class="col-md-6">
-                    <label for="veiculo" class="form-label">Veículo</label>
-                    <select class="form-select" aria-label="Default select example" id="veiculo" name="id_veiculo" value="{{ $viagem->id_veiculo ?? old('id_veiculo') }}">
-                        <option selected value="{{null}}">Escolha um veiculo</option>
-                        @foreach ($veiculos as $veiculo)
-                            <option value="{{ $veiculo->id }}">{{ $veiculo->modelo }} ({{ $veiculo->renavam }})</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="motorista" class="form-label">Motorista</label>
-                    <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista" value="{{ $viagem->id_motorista ?? old('id_motorista') }}">
-                        <option selected value="{{null}}">Escolha um motorista</option>
-                        @foreach ($motoristas as $motorista)
-                            <option value="{{ $motorista->id }}">{{ $motorista->nome }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="km_i_viagem" class="form-label">Km inicial</label>
-                    <input type="number" class="form-control" id="km_i_viagem" name="km_i_viagem" value="{{ $viagem->km_i_viagem ?? old('km_i_viagem') }}">
-                </div>
-                <div class="col-md-6">
-                    <label for="km_f_viagem" class="form-label">Km final</label>
-                    <input type="number" class="form-control" id="km_f_viagem" name="km_f_viagem" value="{{ $viagem->km_f_viagem ?? old('km_f_viagem') }}">
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Gravar</button>
-                    <a role="button" href="/viagens" class="btn btn-danger">Cancelar</a>
-                </div>
+                @if ($viagem->km_f_viagem === null)
+                    <div class="col-md-6">
+                        <label for="veiculo" class="form-label">Veículo</label>
+                        <select class="form-select" aria-label="Default select example" id="veiculo" name="id_veiculo"
+                            value="{{ $viagem->id_veiculo ?? old('id_veiculo') }}" readOnly>
+                                <option value="{{ $viagem->veiculo->id }}">{{ $viagem->veiculo->modelo }} ({{ $viagem->veiculo->renavam }})
+                                </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="motorista" class="form-label">Motorista 1</label>
+                        <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista"
+                        value="{{ $viagem->id_motorista ?? old('id_motorista') }}"
+                        readOnly>
+                                <option value="{{ $viagem->motorista->id ?? null}}">{{ $viagem->motorista->nome ?? ""}}
+                                </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="motorista" class="form-label">Motorista 2</label>
+                        <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista_2"
+                        value="{{ $viagem->id_motorista ?? old('id_motorista_2') }}"
+                        readOnly>
+                                <option value="{{ $viagem->motorista2->id ?? old('id_motorista_2') }}">{{ $viagem->motorista2->nome ?? ""}}
+                                </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="km_i_viagem" class="form-label">Km inicial</label>
+                        <input type="number" class="form-control" id="km_i_viagem" name="km_i_viagem"
+                            value="{{ $viagem->km_i_viagem}}" readOnly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="km_f_viagem" class="form-label">Km final</label>
+                        <input type="number" class="form-control" id="km_f_viagem" name="km_f_viagem"
+                            value="{{ $viagem->km_f_viagem ?? old('km_f_viagem') }}">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Gravar</button>
+                        <a role="button" href="/viagens" class="btn btn-danger">Cancelar</a>
+                    </div>
+                @else
+                    <div class="col-md-6">
+                        <label for="veiculo" class="form-label">Veículo</label>
+                        <select class="form-select" aria-label="Default select example" id="veiculo" name="id_veiculo"
+                            value="{{ $viagem->id_veiculo ?? old('id_veiculo') }}">
+                            <option selected value="{{ null }}">Escolha um veiculo</option>
+                            @foreach ($veiculos as $veiculo)
+                                <option value="{{ $veiculo->id }}">{{ $veiculo->modelo }} ({{ $veiculo->renavam }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="motorista" class="form-label">Motorista</label>
+                        <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista"
+                            value="{{ $viagem->id_motorista ?? old('id_motorista') }}">
+                            <option selected value="{{ null }}">Escolha um motorista</option>
+                            @foreach ($motoristas as $motorista)
+                                <option value="{{ $motorista->id }}">{{ $motorista->nome }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="motorista" class="form-label">Motorista 2</label>
+                        <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista_2"
+                            value="{{ $viagem->id_motorista_2 ?? old('id_motorista') }}">
+                            <option selected value="{{ null }}">Escolha um motorista</option>
+                            @foreach ($motoristas as $motorista)
+                                <option value="{{ $motorista->id }}">{{ $motorista->nome }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="km_i_viagem" class="form-label">Km inicial</label>
+                        <input type="number" class="form-control" id="km_i_viagem" name="km_i_viagem"
+                            value="{{ $viagem->km_i_viagem ?? old('km_i_viagem') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="km_f_viagem" class="form-label">Km final</label>
+                        <input type="number" class="form-control" id="km_f_viagem" name="km_f_viagem"
+                            value="{{ $viagem->km_f_viagem ?? old('km_f_viagem') }}">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Gravar</button>
+                        <a role="button" href="/viagens" class="btn btn-danger">Cancelar</a>
+                    </div>
+                @endif
             </form>
         @else
             <div class="alert alert-danger" role="alert">

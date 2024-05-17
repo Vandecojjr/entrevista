@@ -31,6 +31,7 @@ class ViagemController extends Controller
             'km_i_viagem' => 'required|integer',
             'km_f_viagem' => '',
             'id_motorista' => 'required',
+            'id_motorista_2' => '',
         ]);
 
         $viagen = Viagens::create($request->all());
@@ -40,7 +41,6 @@ class ViagemController extends Controller
     public function show(string $id)
     {
         $viagem = null;
-
         if ($id !== null) {
             $viagem = Viagens::findOrFail($id);
             $veiculos = Veiculo::all();
@@ -57,6 +57,7 @@ class ViagemController extends Controller
             'km_i_viagem' => 'required|integer',
             'km_f_viagem' => '',
             'id_motorista' => 'required',
+            'id_motorista_2' => '',
         ]);
 
         
@@ -67,6 +68,7 @@ class ViagemController extends Controller
         $viagem->km_i_viagem = $request->input('km_i_viagem');
         $viagem->km_f_viagem = $request->input('km_f_viagem');
         $viagem->id_motorista = $request->input('id_motorista');
+        $viagem->id_motorista_2 = $request->input('id_motorista_2');
         
         $viagem->save();
 

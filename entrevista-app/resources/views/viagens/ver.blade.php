@@ -17,8 +17,10 @@
                     <th>Renavan do veículo</th>
                     <th>Km inical</th>
                     <th>Km final</th>
-                    <th>Nome do motorista</th>
-                    <th>CNH do motorista</th>
+                    <th>Nome do motorista 1</th>
+                    <th>CNH do motorista 1</th>
+                    <th>Nome do motorista 2</th>
+                    <th>CNH do motorista 2</th>
                     <th></th>
                 </tr>
             </thead>
@@ -54,21 +56,20 @@
                         <td>{{ $viagem->veiculo->renavam }}</td>
                         <td>{{ $viagem->km_i_viagem }}</td>
                         <td>{{ $viagem->km_f_viagem }}</td>
-                        <td>{{ $viagem->motorista->nome }}</td>
-                        <td>{{ $viagem->motorista->cnh }}</td>
+                        <td>{{ $viagem->motorista->nome ?? ""}}</td>
+                        <td>{{ $viagem->motorista->cnh ?? ""}}</td>
+                        <td>{{ $viagem->motorista2->nome ?? ""}}</td>
+                        <td>{{ $viagem->motorista2->cnh ?? ""}}</td>
                         <td class="d-flex">
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Deletar
                               </button>
                             @if ($viagem->km_f_viagem === null)
                                 <a class="btn  btn-success mx-1" href="/viagens/{{ $viagem->id }}"
-                                    role="button">finalizar</a>
-                            @else
-                                <a class="btn btn-primary mx-1" href="/viagens/{{ $viagem->id }}"
-                                    role="button">Editar</a>
+                                    role="button">Km final</a>
                             @endif
-
-
+                            <a class="btn btn-primary mx-1" href="/viagens/{{ $viagem->id }}"
+                                role="button">Editar</a>
                         </td>
                     </tr>
                 @endforeach

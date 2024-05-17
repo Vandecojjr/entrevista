@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Viagens extends Model
+class Viagens extends Model //viagen com "n" por conta da tabela "viagens"
 {
     use HasFactory;
     protected $fillable = [
@@ -14,6 +14,7 @@ class Viagens extends Model
         'km_i_viagem',
         'km_f_viagem',
         'id_motorista',
+        'id_motorista_2',
     ];
     protected $primaryKey = 'id';
     public $incrementing = false;
@@ -30,6 +31,10 @@ class Viagens extends Model
     public function motorista()
     {
         return $this->belongsTo(Motorista::class, 'id_motorista');
+    }
+    public function motorista2()
+    {
+        return $this->belongsTo(Motorista::class, 'id_motorista_2');
     }
     public function veiculo()
     {

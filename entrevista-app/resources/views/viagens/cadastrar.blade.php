@@ -25,8 +25,17 @@
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="motorista" class="form-label">Motorista</label>
+                    <label for="motorista" class="form-label">Motorista 1</label>
                     <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista">
+                        <option selected value="{{null}}">Escolha um motorista</option>
+                        @foreach ($motoristas as $motorista)
+                            <option value="{{ $motorista->id }}">{{ $motorista->nome }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="motorista" class="form-label">Motorista 2</label>
+                    <select class="form-select" aria-label="Default select example" id="motorista" name="id_motorista_2">
                         <option selected value="{{null}}">Escolha um motorista</option>
                         @foreach ($motoristas as $motorista)
                             <option value="{{ $motorista->id }}">{{ $motorista->nome }}</option>
